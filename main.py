@@ -6,7 +6,7 @@ app.config['DEBUG'] = True
 
 styles = """
 body {
-    background-color: #F0DC82;
+    background-color: #E6E6FA;
 }
 form {
     background-color: #eee;
