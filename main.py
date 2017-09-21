@@ -1,44 +1,60 @@
 from flask import Flask, request
+from caesar import rotate_string
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-from caesar import rotate_string
+styles = """
+body {
+    background-color: #F0DC82;
+}
 
-form = """
-<html>
-    <head>
-        <style>
-            form {
-                background-color: #eee;
-                padding: 20px;
-                margin: 0 auto;
-                width: 540px;
-                font: 16px sans-serif;
-                border-radius: 10px;
+form {
+    background-color: #eee;
+    padding: 20px;
+    margin: 0 auto;
+    width: 540px;
+    font: 16px sans-serif;
+    border-radius: 10px;
 }
            
 textarea {
-                margin: 10px 0;
-                width: 540px;
-                height: 120px;
+    margin: 10px 0;
+    width: 540px;
+    height: 120px;
 }
+""" 
+
+page_header = """
+
+<DOCTYPE! html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Web Caesar</title>
+        <style>
+            """ + styles + """
         </style>
-    </head>
-   
-    <body>
+    </head> 
+    <body>       
+"""
+
+page_footer = """
+    </body>
+</html>
+""" 
+
+form = """
         <form action= /"caesar", method="post">
         <input type="text" name="rot" value="0"/>
-        <textarea name="text">Enter text here...</textarea>
+        <textarea name="text">{0}</textarea>
         <label for="rot">Rotate by:</label>
         <input type="submit" />
         </form>
-
-    
-    </body>
-
-</html>
 """
-
+       
 @app.route("/", methods=["post"])
 def encrypt(text, rot):
     rot = int(request.form['rot'])
@@ -51,4 +67,5 @@ def encrypt(text, rot):
 def index():
          return page_header + form.format("") + page_footer
 
-app.run()
+if __name__ == '__main__':
+    app.run()
