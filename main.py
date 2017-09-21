@@ -8,7 +8,6 @@ styles = """
 body {
     background-color: #F0DC82;
 }
-
 form {
     background-color: #eee;
     padding: 20px;
@@ -17,17 +16,15 @@ form {
     font: 16px sans-serif;
     border-radius: 10px;
 }
-           
 textarea {
     margin: 10px 0;
     width: 540px;
     height: 120px;
 }
-""" 
+"""
 
 page_header = """
-
-<DOCTYPE! html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -37,35 +34,37 @@ page_header = """
         <style>
             """ + styles + """
         </style>
-    </head> 
-    <body>       
+    </head>
+    <body>
 """
 
 page_footer = """
     </body>
 </html>
-""" 
+"""
 
 form = """
-        <form action= /, method="post">
-        <input type="text" name="rot" value="0"/>
-        <textarea name="text">{0}</textarea>
+    <form action="/" method="post">
         <label for="rot">Rotate by:</label>
-        <input type="submit" />
-        </form>
+        <input type="text" name="rot" value="0" />
+        <textarea name="text">{0}</textarea>
+        <br>
+        <input type="submit" value="Submit Query" />
+    </form>
 """
-       
-@app.route("/", methods=["post"])
-def encrypt(text, rot):
+
+
+@app.route("/")
+def index():
+    return page_header + form.format("") + page_footer
+
+@app.route("/", methods=['POST'])
+def encrypt():
     rot = int(request.form['rot'])
     text = str(request.form['text'])
     encrypted = rotate_string(text,rot)
     return page_header + form.format(encrypted) + page_footer
 
 
-@app.route("/")
-def index():
-         return page_header + form.format("") + page_footer
-
 if __name__ == '__main__':
-    app.run()
+app.run()
