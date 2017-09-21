@@ -47,7 +47,7 @@ page_footer = """
 """ 
 
 form = """
-        <form action= /"caesar", method="post">
+        <form action= /, method="post">
         <input type="text" name="rot" value="0"/>
         <textarea name="text">{0}</textarea>
         <label for="rot">Rotate by:</label>
