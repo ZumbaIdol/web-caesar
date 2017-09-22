@@ -4,7 +4,7 @@ from caesar import rotate_string
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-styles = """
+
 body {
     background-color: #E6E6FA;
 }
@@ -21,27 +21,22 @@ textarea {
     width: 540px;
     height: 120px;
 }
-"""
 
-page_header = """
+
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Web Caesar</title>
-        <style>
-            """ + styles + """
+        
         </style>
     </head>
     <body>
-"""
 
-page_footer = """
+
+
     </body>
 </html>
-"""
+
 
 form = """
     <form action="/" method="post">
@@ -56,14 +51,14 @@ form = """
 
 @app.route("/")
 def index():
-    return page_header + form.format("") + page_footer
+    return 
 
 @app.route("/", methods=['POST'])
 def encrypt():
     rot = int(request.form['rot'])
     text = str(request.form['text'])
-    encrypted = rotate_string(text,rot)
-    return page_header + form.format(encrypted) + page_footer
+    encrypted = rotate_string(text, rot)
+    return 
 
 
 if __name__ == '__main__':
